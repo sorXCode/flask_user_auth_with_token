@@ -4,3 +4,4 @@ flask_restful==0.3.8
 flask_login==0.5.0
 flask_httpauth==4.0.0
 flask_migrate==2.5.3
+pytest==5.4.1
