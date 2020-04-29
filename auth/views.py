@@ -71,8 +71,7 @@ class LoginAPI(Resource):
 class Home(Resource):
     @auth_.login_required
     def get(self):
-        return {"msg": "Welcome to @Home_page",
-                "user": g.user.email}
+        return "Welcome {}".format(g.user.email)
 
 
 @auth_.verify_token
