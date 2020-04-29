@@ -20,6 +20,7 @@ class Test(Config):
     # Add a secret key for testing
     SECRET_KEY = "fca409881de74c0900c06066b946bd6dc324f193f0f9fbcd508316fd73db3d6b"
     TESTING = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'test_db.sqlite')
 
