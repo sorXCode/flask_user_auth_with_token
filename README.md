@@ -1,36 +1,104 @@
-# FLASK USER AUTH WITH JSON WEB TOKEN
+# Flask User Authentication with JSON Web Token
 
-## Install dependencies
+## Overview
+This project is a user authentication system built using Flask and JSON Web Tokens (JWT). It provides secure authentication for web applications, enabling user registration, login, and token-based access to protected routes.
 
-`pip install -r requirements.txt`
+## Features
+- **User Registration** – Allows users to create accounts.
+- **User Login** – Secure authentication using JWT.
+- **Token-Based Authentication** – Provides protected endpoints.
+- **Password Hashing** – Uses industry-standard security practices.
+- **Role-Based Access Control (Optional)** – Restrict access based on user roles.
 
-## To run tests
+## Tech Stack
+- **Flask** – Lightweight Python web framework.
+- **Flask-JWT-Extended** – Secure JWT-based authentication.
+- **Flask-SQLAlchemy** – ORM for database management.
+- **Flask-Migrate** – Database migrations with Alembic.
+- **SQLite/PostgreSQL** – Database options.
 
-`pytest`
+## Installation
 
-## To run API [Ubuntu]
+Clone the repository:
+```sh
+git clone https://github.com/sorXCode/flask_user_auth_with_token.git
+cd flask_user_auth_with_token
+```
 
-`export FLASK_APP=flask_app`
+Create a virtual environment:
+```sh
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
 
-`flask run`
+Install dependencies:
+```sh
+pip install -r requirements.txt
+```
 
-## ENDPOINTS
+## Configuration
+Update the `.env` file with your database URL and secret key:
+```
+SECRET_KEY=your_secret_key
+DATABASE_URL=sqlite:///site.db  # Change for PostgreSQL if needed
+```
 
-### Homepage
+## Running the Application
 
-- endpoint: '/'
-- method: GET
+Initialize the database:
+```sh
+flask db upgrade
+```
 
-NOTE: auth_token should be in header. "Bearer +auth_token"
+Run the Flask application:
+```sh
+flask run
+```
 
-### Signup
+## API Endpoints
 
-- endpoint: '/signup'
-- method: POST
-- data: { "email":"xxxxxx", "password":"xxxxxx"}
+### User Registration
+```
+POST /register
+```
+**Request:**
+```json
+{
+  "username": "example_user",
+  "password": "securepassword"
+}
+```
 
-### Login
+### User Login
+```
+POST /login
+```
+**Request:**
+```json
+{
+  "username": "example_user",
+  "password": "securepassword"
+}
+```
+**Response:**
+```json
+{
+  "access_token": "your_jwt_token"
+}
+```
 
-- endpoint: '/login'
-- method: POST
-- data: { "email":"xxxxxx", "password":"xxxxxx"}
+### Protected Route
+```
+GET /protected
+```
+Requires an Authorization header:
+```
+Authorization: Bearer your_jwt_token
+```
+
+## License
+This project is licensed under the MIT License.
+
+---
+
+🚀 **Secure your Flask app with JWT authentication today!**
